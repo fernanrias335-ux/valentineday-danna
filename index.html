@@ -1,37 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sorpresa para Danna 💘</title>
 
 <style>
-:root{
-  --accent:#ff4d8d;
-  --accent2:#ffd166;
-}
-*{box-sizing:border-box;margin:0;padding:0}
 body{
-  font-family:system-ui,-apple-system,sans-serif;
-  color:white;
+  margin:0;
+  font-family:Arial, sans-serif;
   overflow:hidden;
+  color:white;
 }
 
-/* ===== FONDO CON TU FOTO ===== */
+/* Fondo con foto */
 .bg{
   position:fixed;
   inset:0;
   background:
-    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
     url("foto.jpg");
   background-size:cover;
-  background-position:center 30%;
+  background-position:center;
   filter:blur(4px);
   transform:scale(1.05);
   z-index:-1;
 }
 
-/* INTRO */
+/* Intro */
 #intro{
   position:fixed;
   inset:0;
@@ -39,8 +35,7 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  gap:20px;
-  background:rgba(0,0,0,.85);
+  background:black;
   transition:.6s;
 }
 .loader{
@@ -49,18 +44,18 @@ body{
   background:rgba(255,255,255,.2);
   border-radius:10px;
   overflow:hidden;
+  margin-top:15px;
 }
 .loader span{
   display:block;
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  background:linear-gradient(90deg,#ff4d8d,#ffd166);
   animation:load 3s forwards;
 }
 @keyframes load{to{width:100%}}
-.intro-text{text-align:center;font-size:18px;opacity:.9}
 
-/* CARD */
+/* Card */
 .card{
   position:absolute;
   inset:0;
@@ -71,33 +66,11 @@ body{
 }
 .box{
   background:rgba(0,0,0,.65);
-  backdrop-filter:blur(8px);
   padding:30px;
   border-radius:20px;
   text-align:center;
   width:min(95%,450px);
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
 }
-h1{margin-bottom:15px}
-p{margin-bottom:15px;opacity:.9}
-
-/* CONTADOR */
-.count{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-bottom:20px;
-}
-.pill{
-  background:rgba(255,255,255,.15);
-  padding:10px;
-  border-radius:10px;
-  min-width:60px;
-}
-.pill .n{font-weight:bold;font-size:18px}
-.pill .t{font-size:11px;opacity:.7}
-
-/* BOTONES */
 button{
   border:none;
   padding:12px 18px;
@@ -105,10 +78,9 @@ button{
   font-weight:bold;
   cursor:pointer;
   margin:6px;
-  transition:.2s;
 }
 .yes{
-  background:linear-gradient(135deg,var(--accent),#ff2b6f);
+  background:linear-gradient(135deg,#ff4d8d,#ff2b6f);
   color:white;
 }
 .no{
@@ -118,7 +90,19 @@ button{
 }
 button:hover{transform:scale(1.05)}
 
-/* MODAL */
+.count{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:15px 0;
+}
+.pill{
+  background:rgba(255,255,255,.2);
+  padding:8px 12px;
+  border-radius:10px;
+}
+
+/* Modal */
 #modal{
   position:fixed;
   inset:0;
@@ -135,17 +119,17 @@ button:hover{transform:scale(1.05)}
   text-align:center;
 }
 .close{
-  background:var(--accent2);
+  background:#ffd166;
   margin-top:10px;
 }
 
-/* CORAZONES */
+/* Corazones */
 .heart{
   position:fixed;
   bottom:-20px;
   width:15px;
   height:15px;
-  background:var(--accent);
+  background:#ff4d8d;
   transform:rotate(45deg);
   animation:float 5s linear forwards;
 }
@@ -172,10 +156,7 @@ button:hover{transform:scale(1.05)}
 
 <!-- INTRO -->
 <div id="intro">
-  <div class="intro-text">
-    💌 Preparando sorpresa para Danna...<br>
-    Verificando compatibilidad con Fer 😌
-  </div>
+  <h2>💌 Preparando sorpresa para Danna...</h2>
   <div class="loader"><span></span></div>
 </div>
 
@@ -183,13 +164,13 @@ button:hover{transform:scale(1.05)}
 <div class="card" id="card">
   <div class="box">
     <h1>¿Querés ser mi Valentine? 💘</h1>
-    <p>Danna, sos mi casualidad favorita.  
-    Prometo una cita hermosa y muchos abrazos.</p>
+    <p>Danna, sos mi casualidad favorita.<br>
+    Prometo la mejor cita del mundo 😌</p>
 
     <div class="count">
-      <div class="pill"><div class="n" id="d"></div><div class="t">días</div></div>
-      <div class="pill"><div class="n" id="h"></div><div class="t">hrs</div></div>
-      <div class="pill"><div class="n" id="m"></div><div class="t">min</div></div>
+      <div class="pill"><span id="d"></span> días</div>
+      <div class="pill"><span id="h"></span> hrs</div>
+      <div class="pill"><span id="m"></span> min</div>
     </div>
 
     <button class="yes" onclick="accept()">Sí, obvio 💖</button>
@@ -201,58 +182,66 @@ button:hover{transform:scale(1.05)}
 <div id="modal">
   <div class="modal-box">
     <h2>¡SÍIIII! 🎉💞</h2>
-    <p>Ahora es oficial, Danna.<br>Te debo la mejor cita del mundo 😌</p>
+    <p>Wise men say…<br>
+    But I couldn’t help falling in love with you, Danna 💘</p>
     <button class="close" onclick="closeModal()">Cerrar 💛</button>
   </div>
 </div>
 
+<!-- Música -->
+<audio id="music" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-// INTRO
-setTimeout(()=>{
-  intro.style.opacity="0";
+document.addEventListener("DOMContentLoaded",function(){
+
+  const intro=document.getElementById("intro");
+  const card=document.getElementById("card");
+
   setTimeout(()=>{
-    intro.style.display="none";
-    card.style.display="flex";
-  },600);
-},3000);
+    intro.style.opacity="0";
+    setTimeout(()=>{
+      intro.style.display="none";
+      card.style.display="flex";
+    },600);
+  },3000);
 
-// CONTADOR 14 FEB
-let year=new Date().getFullYear();
-let target=new Date(year,1,14);
-if(new Date()>target) target=new Date(year+1,1,14);
+  // Contador 14 febrero
+  let year=new Date().getFullYear();
+  let target=new Date(year,1,14);
+  if(new Date()>target) target=new Date(year+1,1,14);
 
-function update(){
-  let diff=target-new Date();
-  let d=Math.floor(diff/86400000);
-  let h=Math.floor(diff%86400000/3600000);
-  let m=Math.floor(diff%3600000/60000);
-  document.getElementById("d").innerText=d;
-  document.getElementById("h").innerText=h;
-  document.getElementById("m").innerText=m;
-}
-update();
-setInterval(update,60000);
+  function update(){
+    let diff=target-new Date();
+    let d=Math.floor(diff/86400000);
+    let h=Math.floor(diff%86400000/3600000);
+    let m=Math.floor(diff%3600000/60000);
+    document.getElementById("d").innerText=d;
+    document.getElementById("h").innerText=h;
+    document.getElementById("m").innerText=m;
+  }
+  update();
+  setInterval(update,60000);
 
-// BOTÓN QUE ESCAPA
+});
+
 function escapeBtn(btn){
   btn.style.position="absolute";
   btn.style.left=Math.random()*70+"%";
   btn.style.top=Math.random()*70+"%";
 }
 
-// ACEPTAR
 function accept(){
   document.getElementById("modal").style.display="flex";
   document.getElementById("music").play();
   burstHearts();
 }
 
-}
 function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-// CORAZONES
 function burstHearts(){
   for(let i=0;i<25;i++){
     let h=document.createElement("div");
@@ -263,9 +252,8 @@ function burstHearts(){
   }
 }
 </script>
-<audio id="music" loop>
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
+
 </body>
 </html>
+
 
