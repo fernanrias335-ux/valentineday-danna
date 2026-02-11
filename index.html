@@ -243,7 +243,10 @@ function escapeBtn(btn){
 // ACEPTAR
 function accept(){
   document.getElementById("modal").style.display="flex";
+  document.getElementById("music").play();
   burstHearts();
+}
+
 }
 function closeModal(){
   document.getElementById("modal").style.display="none";
@@ -260,6 +263,9 @@ function burstHearts(){
   }
 }
 </script>
-
+<audio id="music" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 </body>
 </html>
+
