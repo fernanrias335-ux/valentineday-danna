@@ -3,127 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sorpresa para Danna 💘</title>
+<title>Examen de Programación - 2026</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  overflow:hidden;
+  background:#0f172a;
   color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
 }
 
-/* Fondo con foto */
-.bg{
+/* Pantalla examen */
+#exam{
+  text-align:center;
+  background:#1e293b;
+  padding:40px;
+  border-radius:15px;
+  width:min(95%,400px);
+}
+
+input{
+  padding:10px;
+  width:80%;
+  border-radius:8px;
+  border:none;
+  margin-top:15px;
+}
+
+button{
+  margin-top:20px;
+  padding:10px 18px;
+  border:none;
+  border-radius:8px;
+  background:#3b82f6;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* Pantalla romántica */
+#romance{
+  display:none;
   position:fixed;
   inset:0;
+  justify-content:center;
+  align-items:center;
   background:
     linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
     url("foto.jpg");
   background-size:cover;
   background-position:center;
-  filter:blur(4px);
-  transform:scale(1.05);
-  z-index:-1;
-}
-
-/* Intro */
-#intro{
-  position:fixed;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  background:black;
-  transition:.6s;
-}
-.loader{
-  width:220px;
-  height:8px;
-  background:rgba(255,255,255,.2);
-  border-radius:10px;
-  overflow:hidden;
-  margin-top:15px;
-}
-.loader span{
-  display:block;
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#ff4d8d,#ffd166);
-  animation:load 3s forwards;
-}
-@keyframes load{to{width:100%}}
-
-/* Card */
-.card{
-  position:absolute;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
+  text-align:center;
   padding:20px;
 }
+
 .box{
-  background:rgba(0,0,0,.65);
+  background:rgba(0,0,0,.7);
   padding:30px;
   border-radius:20px;
-  text-align:center;
-  width:min(95%,450px);
+  max-width:450px;
 }
-button{
-  border:none;
-  padding:12px 18px;
-  border-radius:12px;
-  font-weight:bold;
-  cursor:pointer;
-  margin:6px;
-}
+
 .yes{
-  background:linear-gradient(135deg,#ff4d8d,#ff2b6f);
-  color:white;
+  background:#ff4d8d;
 }
+
 .no{
-  background:rgba(255,255,255,.2);
-  color:white;
+  background:rgba(255,255,255,.3);
   position:relative;
 }
-button:hover{transform:scale(1.05)}
 
-.count{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin:15px 0;
-}
-.pill{
-  background:rgba(255,255,255,.2);
-  padding:8px 12px;
-  border-radius:10px;
-}
-
-/* Modal */
-#modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,.7);
-}
-.modal-box{
-  background:white;
-  color:black;
-  padding:25px;
-  border-radius:15px;
-  text-align:center;
-}
-.close{
-  background:#ffd166;
-  margin-top:10px;
-}
-
-/* Corazones */
+/* corazones */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -147,32 +106,41 @@ button:hover{transform:scale(1.05)}
 @keyframes float{
   to{transform:translateY(-110vh) rotate(45deg);opacity:0}
 }
+
+/* modal */
+#modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,.8);
+}
+.modal-box{
+  background:white;
+  color:black;
+  padding:25px;
+  border-radius:15px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-
-<!-- INTRO -->
-<div id="intro">
-  <h2>💌 Preparando sorpresa para Danna...</h2>
-  <div class="loader"><span></span></div>
+<!-- EXAMEN -->
+<div id="exam">
+  <h2>Examen de Programación</h2>
+  <p>Universidad Nacional - 2026</p>
+  <p>Ingrese su nombre para comenzar:</p>
+  <input type="text" id="nombre" placeholder="Nombre completo">
+  <br>
+  <button onclick="startExam()">Comenzar evaluación</button>
 </div>
 
-<!-- CONTENIDO -->
-<div class="card" id="card">
+<!-- ROMANCE -->
+<div id="romance">
   <div class="box">
-    <h1>¿Querés ser mi Valentine? 💘</h1>
-    <p>Danna, sos mi casualidad favorita.<br>
-    Prometo la mejor cita del mundo 😌</p>
-
-    <div class="count">
-      <div class="pill"><span id="d"></span> días</div>
-      <div class="pill"><span id="h"></span> hrs</div>
-      <div class="pill"><span id="m"></span> min</div>
-    </div>
-
+    <h1 id="pregunta"></h1>
     <button class="yes" onclick="accept()">Sí, obvio 💖</button>
     <button class="no" onmouseover="escapeBtn(this)">Mmm… no sé 🙈</button>
   </div>
@@ -183,48 +151,28 @@ button:hover{transform:scale(1.05)}
   <div class="modal-box">
     <h2>¡SÍIIII! 🎉💞</h2>
     <p>Wise men say…<br>
-    But I couldn’t help falling in love with you, Danna 💘</p>
-    <button class="close" onclick="closeModal()">Cerrar 💛</button>
+    But I couldn’t help falling in love with you 💘</p>
+    <button onclick="closeModal()">Cerrar</button>
   </div>
 </div>
 
-<!-- Música -->
 <audio id="music" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-document.addEventListener("DOMContentLoaded",function(){
-
-  const intro=document.getElementById("intro");
-  const card=document.getElementById("card");
-
-  setTimeout(()=>{
-    intro.style.opacity="0";
-    setTimeout(()=>{
-      intro.style.display="none";
-      card.style.display="flex";
-    },600);
-  },3000);
-
-  // Contador 14 febrero
-  let year=new Date().getFullYear();
-  let target=new Date(year,1,14);
-  if(new Date()>target) target=new Date(year+1,1,14);
-
-  function update(){
-    let diff=target-new Date();
-    let d=Math.floor(diff/86400000);
-    let h=Math.floor(diff%86400000/3600000);
-    let m=Math.floor(diff%3600000/60000);
-    document.getElementById("d").innerText=d;
-    document.getElementById("h").innerText=h;
-    document.getElementById("m").innerText=m;
+function startExam(){
+  const nombre=document.getElementById("nombre").value;
+  if(nombre.trim()==""){
+    alert("Debe ingresar su nombre para continuar.");
+    return;
   }
-  update();
-  setInterval(update,60000);
 
-});
+  document.getElementById("exam").style.display="none";
+  document.getElementById("romance").style.display="flex";
+  document.getElementById("pregunta").innerHTML=
+  nombre+", ¿querés ser mi Valentine? 💘";
+}
 
 function escapeBtn(btn){
   btn.style.position="absolute";
@@ -255,5 +203,3 @@ function burstHearts(){
 
 </body>
 </html>
-
-
