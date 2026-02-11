@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sorpresa para Danna 💘</title>
+
+<style>
+:root{
+  --accent:#ff4d8d;
+  --accent2:#ffd166;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,sans-serif;
+  color:white;
+  overflow:hidden;
+}
+
+/* ===== FONDO CON TU FOTO ===== */
+.bg{
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("foto.jpg");
+  background-size:cover;
+  background-position:center 30%;
+  filter:blur(4px);
+  transform:scale(1.05);
+  z-index:-1;
+}
+
+/* INTRO */
+#intro{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  background:rgba(0,0,0,.85);
+  transition:.6s;
+}
+.loader{
+  width:220px;
+  height:8px;
+  background:rgba(255,255,255,.2);
+  border-radius:10px;
+  overflow:hidden;
+}
+.loader span{
+  display:block;
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  animation:load 3s forwards;
+}
+@keyframes load{to{width:100%}}
+.intro-text{text-align:center;font-size:18px;opacity:.9}
+
+/* CARD */
+.card{
+  position:absolute;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+.box{
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:min(95%,450px);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+h1{margin-bottom:15px}
+p{margin-bottom:15px;opacity:.9}
+
+/* CONTADOR */
+.count{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+.pill{
+  background:rgba(255,255,255,.15);
+  padding:10px;
+  border-radius:10px;
+  min-width:60px;
+}
+.pill .n{font-weight:bold;font-size:18px}
+.pill .t{font-size:11px;opacity:.7}
+
+/* BOTONES */
+button{
+  border:none;
+  padding:12px 18px;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+  margin:6px;
+  transition:.2s;
+}
+.yes{
+  background:linear-gradient(135deg,var(--accent),#ff2b6f);
+  color:white;
+}
+.no{
+  background:rgba(255,255,255,.2);
+  color:white;
+  position:relative;
+}
+button:hover{transform:scale(1.05)}
+
+/* MODAL */
+#modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,.7);
+}
+.modal-box{
+  background:white;
+  color:black;
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+}
+.close{
+  background:var(--accent2);
+  margin-top:10px;
+}
+
+/* CORAZONES */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  width:15px;
+  height:15px;
+  background:var(--accent);
+  transform:rotate(45deg);
+  animation:float 5s linear forwards;
+}
+.heart:before,
+.heart:after{
+  content:"";
+  position:absolute;
+  width:15px;
+  height:15px;
+  background:inherit;
+  border-radius:50%;
+}
+.heart:before{left:-7px}
+.heart:after{top:-7px}
+@keyframes float{
+  to{transform:translateY(-110vh) rotate(45deg);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-text">
+    💌 Preparando sorpresa para Danna...<br>
+    Verificando compatibilidad con Fer 😌
+  </div>
+  <div class="loader"><span></span></div>
+</div>
+
+<!-- CONTENIDO -->
+<div class="card" id="card">
+  <div class="box">
+    <h1>¿Querés ser mi Valentine? 💘</h1>
+    <p>Danna, sos mi casualidad favorita.  
+    Prometo una cita hermosa y muchos abrazos.</p>
+
+    <div class="count">
+      <div class="pill"><div class="n" id="d"></div><div class="t">días</div></div>
+      <div class="pill"><div class="n" id="h"></div><div class="t">hrs</div></div>
+      <div class="pill"><div class="n" id="m"></div><div class="t">min</div></div>
+    </div>
+
+    <button class="yes" onclick="accept()">Sí, obvio 💖</button>
+    <button class="no" onmouseover="escapeBtn(this)">Mmm… no sé 🙈</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-box">
+    <h2>¡SÍIIII! 🎉💞</h2>
+    <p>Ahora es oficial, Danna.<br>Te debo la mejor cita del mundo 😌</p>
+    <button class="close" onclick="closeModal()">Cerrar 💛</button>
+  </div>
+</div>
+
+<script>
+// INTRO
+setTimeout(()=>{
+  intro.style.opacity="0";
+  setTimeout(()=>{
+    intro.style.display="none";
+    card.style.display="flex";
+  },600);
+},3000);
+
+// CONTADOR 14 FEB
+let year=new Date().getFullYear();
+let target=new Date(year,1,14);
+if(new Date()>target) target=new Date(year+1,1,14);
+
+function update(){
+  let diff=target-new Date();
+  let d=Math.floor(diff/86400000);
+  let h=Math.floor(diff%86400000/3600000);
+  let m=Math.floor(diff%3600000/60000);
+  document.getElementById("d").innerText=d;
+  document.getElementById("h").innerText=h;
+  document.getElementById("m").innerText=m;
+}
+update();
+setInterval(update,60000);
+
+// BOTÓN QUE ESCAPA
+function escapeBtn(btn){
+  btn.style.position="absolute";
+  btn.style.left=Math.random()*70+"%";
+  btn.style.top=Math.random()*70+"%";
+}
+
+// ACEPTAR
+function accept(){
+  document.getElementById("modal").style.display="flex";
+  burstHearts();
+}
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+
+// CORAZONES
+function burstHearts(){
+  for(let i=0;i<25;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+  }
+}
+</script>
+
+</body>
+</html>
